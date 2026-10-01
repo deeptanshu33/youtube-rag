@@ -16,6 +16,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 class YTRag:
     _vector_store: VectorStore
     _curr_video_id: str
+    _curr_video_title: str
     _ytt_api = None
     _retriever: VectorStoreRetriever
     _llm: BaseChatModel
@@ -24,6 +25,16 @@ class YTRag:
         self._llm = llm
         self._ytt_api = YouTubeTranscriptApi()
         self._curr_video_id = ""
+        self._curr_video_title= ""
+
+    @property
+    def curr_video_title(self):
+        return self._curr_video_title
+    
+    @curr_video_title.setter
+    def curr_video_title(self, new_title: str):
+        self._curr_video_title = new_title
+    
 
     def choose_video(self, video_id: str):
         self._curr_video_id = video_id
